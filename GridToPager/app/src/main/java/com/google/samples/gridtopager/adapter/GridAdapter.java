@@ -42,14 +42,7 @@ import com.google.samples.gridtopager.fragment.ImagePagerFragment;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * A fragment for displaying a grid of images.
- */
 public class GridAdapter extends RecyclerView.Adapter<ImageViewHolder> {
-
-  /**
-   * A listener that is attached to all ViewHolders to handle image loading events and clicks.
-   */
   private interface ViewHolderListener {
 
     void onLoadCompleted(ImageView view, int adapterPosition);
@@ -60,9 +53,6 @@ public class GridAdapter extends RecyclerView.Adapter<ImageViewHolder> {
   private final RequestManager requestManager;
   private final ViewHolderListener viewHolderListener;
 
-  /**
-   * Constructs a new grid adapter for the given {@link Fragment}.
-   */
   public GridAdapter(Fragment fragment) {
     this.requestManager = Glide.with(fragment);
     this.viewHolderListener = new ViewHolderListenerImpl(fragment);
@@ -87,9 +77,6 @@ public class GridAdapter extends RecyclerView.Adapter<ImageViewHolder> {
   }
 
 
-  /**
-   * Default {@link ViewHolderListener} implementation.
-   */
   private static class ViewHolderListenerImpl implements ViewHolderListener {
 
     private Fragment fragment;
@@ -112,14 +99,6 @@ public class GridAdapter extends RecyclerView.Adapter<ImageViewHolder> {
       fragment.startPostponedEnterTransition();
     }
 
-    /**
-     * Handles a view click by setting the current position to the given {@code position} and
-     * starting a {@link  ImagePagerFragment} which displays the image at the position.
-     *
-     * @param view the clicked {@link ImageView} (the shared element view will be re-mapped at the
-     * GridFragment's SharedElementCallback)
-     * @param position the selected view position
-     */
     @Override
     public void onItemClicked(View view, int position) {
       // Update the position.
@@ -160,12 +139,6 @@ public class GridAdapter extends RecyclerView.Adapter<ImageViewHolder> {
       itemView.findViewById(R.id.card_view).setOnClickListener(this);
     }
 
-    /**
-     * Binds this view holder to the given adapter position.
-     *
-     * The binding will load the image into the image view, as well as set its transition name for
-     * later.
-     */
     void onBind() {
       int adapterPosition = getAdapterPosition();
       setImage(adapterPosition);
